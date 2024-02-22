@@ -13,6 +13,8 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
       with:
+        repository: UltraFeed/editorconfig
+        ref: main
         submodules: 'recursive'
 
     - name: Update submodules
