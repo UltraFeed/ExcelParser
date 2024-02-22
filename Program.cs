@@ -36,7 +36,7 @@ internal sealed class Program : Form
 
 	private void InitializeComponent ()
 	{
-		Text = $"ExcelParser";
+		Text = "ExcelParser";
 
 		TableLayoutPanel panel = new()
 		{
