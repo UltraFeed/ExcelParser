@@ -1,0 +1,19 @@
+name: Update submodules
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  update-submodules:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        submodules: 'recursive'
+
+    - name: Update submodules
+      run: git submodule update --remote
