@@ -11,3 +11,9 @@ updates:
       interval: "daily"
     allow:
       - dependency-type: "all"
+
+updates:
+  - package-ecosystem: "gitsubmodule"
+    schedule:
+        interval: "daily"
+    directory: "/"
