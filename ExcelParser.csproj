@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+	<IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AnalysisLevel>latest-all</AnalysisLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <UseWindowsForms>True</UseWindowsForms>
+    <ErrorReport>none</ErrorReport>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <WarningLevel>9999</WarningLevel>
+    <DebugType>none</DebugType>
+    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <WarningLevel>9999</WarningLevel>
+    <DebugType>none</DebugType>
+    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="resources\default_settings.json" />
+    <EmbeddedResource Include="resources\logoLarge.png" />
+    <EmbeddedResource Include="resources\logoSmall.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EPPlus" Version="7.0.5" />
+    <PackageReference Include="NPOI" Version="2.6.2" />
+  </ItemGroup>
+
+</Project>
