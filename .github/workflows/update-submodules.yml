@@ -17,4 +17,6 @@ jobs:
         submodules: 'recursive'
 
     - name: Update submodules
-      run: git submodule update --remote
+      run: |
+        git submodule update --init --recursive
+        git submodule foreach git pull origin master
