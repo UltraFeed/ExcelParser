@@ -86,6 +86,7 @@ internal static class Internet
 			string message0 = $"На ваших ПК нет проблем с интернетом.";
 			DocumentUtils.AddParagraph(doc, message0);
 		}
+
 		Debug.WriteLine($"\nEND DEBUG MESSAGES\n");
 
 		return troubledPCNumbers;

@@ -28,6 +28,7 @@ internal static class DocumentUtils
 		{
 			run.AddTab();
 		}
+
 		if (spacing)
 		{
 			paragraph.SpacingAfterLines = 0;
@@ -350,6 +351,7 @@ internal static class DocumentUtils
 			// Пустая строка для разделения информации по разным ПК
 			CreateNullParagraphs(doc, 1);
 		}
+
 		Debug.WriteLine($"\nEND DEBUG MESSAGES\n");
 	}
 }

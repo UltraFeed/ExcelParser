@@ -86,6 +86,7 @@ internal static class Power
 			string message0 = $"Каждый ПК подключён к источнику бесперебойного питания.";
 			DocumentUtils.AddParagraph(doc, message0);
 		}
+
 		Debug.WriteLine($"\nEND DEBUG MESSAGES\n");
 
 		return troubledPCNumbers;

@@ -87,6 +87,7 @@ internal static class Display
 			Debug.WriteLine(message0);
 			DocumentUtils.AddParagraph(doc, message0);
 		}
+
 		Debug.WriteLine($"\nEND DEBUG MESSAGES\n");
 
 		return troubledPcNumbers;

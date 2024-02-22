@@ -48,6 +48,7 @@ internal static class Constants
 				// Записываем в файл содержимое настроек по умолчанию из встроенного ресурса
 				File.WriteAllText(jsonFilePath, reader.ReadToEnd());
 			}
+
 			_ = MessageBox.Show($"Файл {jsonFilePath} создан на основе настроек по умолчанию");
 		}
 

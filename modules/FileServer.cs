@@ -80,6 +80,7 @@ internal static class FileServer
 			string message0 = $"C Резервированием и хранением данных проблем не обнаружено";
 			DocumentUtils.AddParagraph(doc, message0);
 		}
+
 		Debug.WriteLine($"\nEND DEBUG MESSAGES\n");
 
 		return troubledPcNumbers;

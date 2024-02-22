@@ -140,6 +140,7 @@ internal static class ConstantsUtils
 				pcNumbers.Add(pcNumberCell);
 			}
 		}
+
 		pcNumbers.Sort();
 		return pcNumbers;
 	}
