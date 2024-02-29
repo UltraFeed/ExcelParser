@@ -293,7 +293,7 @@ internal static class DocumentUtils
 			AddParagraph(doc, $"Проблемы:", spacing: true);
 
 			// Defender
-			if (badDefenderPcNumbers.Equals(pcNumber))
+			if (badDefenderPcNumbers.Contains(pcNumber))
 			{
 				string message = $"Отсутствует Антивирус";
 				Debug.WriteLine(message);
@@ -301,7 +301,7 @@ internal static class DocumentUtils
 			}
 
 			// Power
-			if (badPowerPcNumbers.Equals(pcNumber))
+			if (badPowerPcNumbers.Contains(pcNumber))
 			{
 				string message = $"Отсутствует ИБП";
 				Debug.WriteLine(message);
@@ -309,7 +309,7 @@ internal static class DocumentUtils
 			}
 
 			// Internet
-			if (badInternetPcNumbers.Equals(pcNumber))
+			if (badInternetPcNumbers.Contains(pcNumber))
 			{
 				string message = $"Плохая работа интернета";
 				Debug.WriteLine(message);
@@ -317,7 +317,7 @@ internal static class DocumentUtils
 			}
 
 			// SystemDrive
-			if (badSystemDrivePcNumbers.Equals(pcNumber))
+			if (badSystemDrivePcNumbers.Contains(pcNumber))
 			{
 				string message = $"В качестве системного диска должен быть установлен SSD";
 				Debug.WriteLine(message);
@@ -325,7 +325,7 @@ internal static class DocumentUtils
 			}
 
 			// FileServer
-			if (badFileServerPcNumbers.Equals(pcNumber))
+			if (badFileServerPcNumbers.Contains(pcNumber))
 			{
 				string message = $"Является файловым сервером";
 				Debug.WriteLine(message);
@@ -333,7 +333,7 @@ internal static class DocumentUtils
 			}
 
 			// Display
-			if (badDisplayPcNumbers.Equals(pcNumber))
+			if (badDisplayPcNumbers.Contains(pcNumber))
 			{
 				string message = $"С монитором";
 				Debug.WriteLine(message);
@@ -341,7 +341,7 @@ internal static class DocumentUtils
 			}
 
 			// MouseKeyboard
-			if (badMouseKeyboardPcNumbers.Equals(pcNumber))
+			if (badMouseKeyboardPcNumbers.Contains(pcNumber))
 			{
 				string message = $"С клавиатурой и мышью";
 				Debug.WriteLine(message);
