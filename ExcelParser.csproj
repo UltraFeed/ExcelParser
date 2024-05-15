@@ -31,8 +31,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="EPPlus" Version="7.0.5" />
-    <PackageReference Include="NPOI" Version="2.6.2" />
+    <PackageReference Include="EPPlus" Version="7.1.2" />
+    <PackageReference Include="NPOI" Version="2.7.0" />
   </ItemGroup>
 
 </Project>
