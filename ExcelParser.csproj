@@ -25,9 +25,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="resources\default_settings.json" />
-    <EmbeddedResource Include="resources\logoLarge.png" />
-    <EmbeddedResource Include="resources\logoSmall.png" />
+    <EmbeddedResource Include="resources\default_settings.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="resources\logoLarge.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="resources\logoSmall.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
