@@ -88,95 +88,26 @@ internal static class Constants
 		fileServerColumn = settings.fileServerColumn;
 	}
 
-	// Метод для проверки настроек
+	// Метод для проверки всех настроек
 	private static bool CheckSettingsValid (Settings settings)
 	{
 		bool isValid = true;
 		StringBuilder errorMessage = new();
 
-		if (settings.firstDataRow < 1)
-		{
-			_ = errorMessage.AppendLine($"Неверное значение {nameof(settings.firstDataRow)}. Значение должно быть больше 0.");
-			isValid = false;
-		}
-
-		if (settings.dateColumn < 1)
-		{
-			_ = errorMessage.AppendLine($"Неверное значение для {nameof(settings.dateColumn)}:  {settings.dateColumn.ToString()}");
-			isValid = false;
-		}
-
-		if (settings.companiesNamesColumn < 1)
-		{
-			_ = errorMessage.AppendLine($"Неверное значение для {nameof(settings.companiesNamesColumn)}:  {settings.companiesNamesColumn.ToString()}");
-			isValid = false;
-		}
-
-		if (settings.companiesAddressesColumn < 1)
-		{
-			_ = errorMessage.AppendLine($"Неверное значение для {nameof(settings.companiesAddressesColumn)}:  {settings.companiesAddressesColumn.ToString()}");
-			isValid = false;
-		}
-
-		if (settings.userNamesColumn < 1)
-		{
-			_ = errorMessage.AppendLine($"Неверное значение для {nameof(settings.userNamesColumn)}:  {settings.userNamesColumn.ToString()}");
-			isValid = false;
-		}
-
-		if (settings.userPositionsColumn < 1)
-		{
-			_ = errorMessage.AppendLine($"Неверное значение для {nameof(settings.userPositionsColumn)}:  {settings.userPositionsColumn.ToString()}");
-			isValid = false;
-		}
-
-		if (settings.pcNumbersColumn < 1)
-		{
-			_ = errorMessage.AppendLine($"Неверное значение для {nameof(settings.pcNumbersColumn)}:  {settings.pcNumbersColumn.ToString()}");
-			isValid = false;
-		}
-
-		if (settings.defenderTypesColumn < 1)
-		{
-			_ = errorMessage.AppendLine($"Неверное значение для {nameof(settings.defenderTypesColumn)}:  {settings.defenderTypesColumn.ToString()}");
-			isValid = false;
-		}
-
-		if (settings.powerSupplyColumn < 1)
-		{
-			_ = errorMessage.AppendLine($"Неверное значение для {nameof(settings.powerSupplyColumn)}:  {settings.powerSupplyColumn.ToString()}");
-			isValid = false;
-		}
-
-		if (settings.systemDriveColumn < 1)
-		{
-			_ = errorMessage.AppendLine($"Неверное значение для {nameof(settings.systemDriveColumn)}:  {settings.systemDriveColumn.ToString()}");
-			isValid = false;
-		}
-
-		if (settings.displayColumn < 1)
-		{
-			_ = errorMessage.AppendLine($"Неверное значение для {nameof(settings.displayColumn)}: {settings.displayColumn.ToString()}");
-			isValid = false;
-		}
-
-		if (settings.mouseKeyboardColumn < 1)
-		{
-			_ = errorMessage.AppendLine($"Неверное значение для {nameof(settings.mouseKeyboardColumn)}: {settings.mouseKeyboardColumn.ToString()}");
-			isValid = false;
-		}
-
-		if (settings.internetStabilityColumn < 1)
-		{
-			_ = errorMessage.AppendLine($"Неверное значение для {nameof(settings.internetStabilityColumn)}:  {settings.internetStabilityColumn.ToString()}");
-			isValid = false;
-		}
-
-		if (settings.fileServerColumn < 1)
-		{
-			_ = errorMessage.AppendLine($"Неверное значение для {nameof(settings.fileServerColumn)}:  {settings.fileServerColumn.ToString()}");
-			isValid = false;
-		}
+		isValid &= settings.firstDataRow.IsValid(nameof(settings.firstDataRow), errorMessage);
+		isValid &= settings.dateColumn.IsValid(nameof(settings.dateColumn), errorMessage);
+		isValid &= settings.companiesNamesColumn.IsValid(nameof(settings.companiesNamesColumn), errorMessage);
+		isValid &= settings.companiesAddressesColumn.IsValid(nameof(settings.companiesAddressesColumn), errorMessage);
+		isValid &= settings.userNamesColumn.IsValid(nameof(settings.userNamesColumn), errorMessage);
+		isValid &= settings.userPositionsColumn.IsValid(nameof(settings.userPositionsColumn), errorMessage);
+		isValid &= settings.pcNumbersColumn.IsValid(nameof(settings.pcNumbersColumn), errorMessage);
+		isValid &= settings.defenderTypesColumn.IsValid(nameof(settings.defenderTypesColumn), errorMessage);
+		isValid &= settings.powerSupplyColumn.IsValid(nameof(settings.powerSupplyColumn), errorMessage);
+		isValid &= settings.systemDriveColumn.IsValid(nameof(settings.systemDriveColumn), errorMessage);
+		isValid &= settings.displayColumn.IsValid(nameof(settings.displayColumn), errorMessage);
+		isValid &= settings.mouseKeyboardColumn.IsValid(nameof(settings.mouseKeyboardColumn), errorMessage);
+		isValid &= settings.internetStabilityColumn.IsValid(nameof(settings.internetStabilityColumn), errorMessage);
+		isValid &= settings.fileServerColumn.IsValid(nameof(settings.fileServerColumn), errorMessage);
 
 		if (!isValid)
 		{
@@ -184,6 +115,18 @@ internal static class Constants
 		}
 
 		return isValid;
+	}
+
+	// Метод для проверки конкретного значения
+	private static bool IsValid (this int value, string name, StringBuilder errorMessage)
+	{
+		if (value < 1)
+		{
+			_ = errorMessage.AppendLine($"Неверное значение для {name}: {value}");
+			return false;
+		}
+
+		return true;
 	}
 
 	private sealed class Settings
