@@ -147,3 +147,143 @@ internal static class Constants
         public int fileServerColumn { get; set; }
     }
 }
+
+/*
+
+internal class Constants
+{
+    [JsonPropertyName("companiesAddressesColumn")]
+    public static int companiesAddressesColumn { get; set; }
+
+    [JsonPropertyName("companiesNamesColumn")]
+    public static int companiesNamesColumn { get; set; }
+
+    [JsonPropertyName("dateColumn")]
+    public static int dateColumn { get; set; }
+
+    [JsonPropertyName("defenderTypesColumn")]
+    public static int defenderTypesColumn { get; set; }
+
+    [JsonPropertyName("displayColumn")]
+    public static int displayColumn { get; set; }
+
+    [JsonPropertyName("fileServerColumn")]
+    public static int fileServerColumn { get; set; }
+
+    [JsonPropertyName("firstDataRow")]
+    public static int firstDataRow { get; set; }
+
+    [JsonPropertyName("internetStabilityColumn")]
+    public static int internetStabilityColumn { get; set; }
+
+    [JsonPropertyName("mouseKeyboardColumn")]
+    public static int mouseKeyboardColumn { get; set; }
+
+    [JsonPropertyName("pcNumbersColumn")]
+    public static int pcNumbersColumn { get; set; }
+
+    [JsonPropertyName("powerSupplyColumn")]
+    public static int powerSupplyColumn { get; set; }
+
+    [JsonPropertyName("systemDriveColumn")]
+    public static int systemDriveColumn { get; set; }
+
+    [JsonPropertyName("userNamesColumn")]
+    public static int userNamesColumn { get; set; }
+
+    [JsonPropertyName("userPositionsColumn")]
+    public static int userPositionsColumn { get; set; }
+
+    // присваиваем значения переменным, которые в любом случае поменяются, чтобы избежать предупреждений
+    public static string companyName { get; set; } = string.Empty;
+    public static string companyAddress { get; set; } = string.Empty;
+    public static DateTime firstDate { get; set; } = DateTime.Now;
+    public static DateTime secondDate { get; set; } = DateTime.Now;
+}
+
+internal static class ConstantsLoader
+{
+    internal static Constants LoadConstantsFromJson ()
+    {
+        string jsonFilePath = "settings.json";
+        string defaultSettingsPath = "ExcelParser.resources.default_settings.json";
+
+        // Проверяем существование файла настроек. Если отсутствует, то создаём новый на основе значений по умолчанию
+        if (!File.Exists(jsonFilePath))
+        {
+            _ = MessageBox.Show($"Файл настроек {jsonFilePath} не найден");
+
+            using (StreamReader reader = new(Assembly.GetExecutingAssembly().GetManifestResourceStream(defaultSettingsPath)))
+            {
+                // Записываем в файл содержимое настроек по умолчанию из встроенного ресурса
+                File.WriteAllText(jsonFilePath, reader.ReadToEnd());
+            }
+
+            _ = MessageBox.Show($"Файл {jsonFilePath} создан на основе настроек по умолчанию");
+        }
+
+        string jsonContent = File.ReadAllText(jsonFilePath);
+        Constants? constants = null;
+        try
+        {
+            constants = JsonSerializer.Deserialize<Constants>(jsonContent);
+        }
+        catch (JsonException ex)
+        {
+            _ = MessageBox.Show($"Ошибка десериализации {Path.GetFileName(jsonFilePath)}: {ex.Message}");
+            Environment.Exit(0);
+        }
+
+        // проверяем корректность файла настроек
+        if (constants == null || !CheckSettingsValid())
+        {
+            _ = MessageBox.Show($"Ошибка при загрузке настроек. {Path.GetFileName(jsonFilePath)} задан некорректно");
+            Environment.Exit(0);
+        }
+
+        return constants;
+    }
+
+    // Метод для проверки всех настроек
+    private static bool CheckSettingsValid ()
+    {
+        bool isValid = true;
+        StringBuilder errorMessage = new();
+
+        isValid &= Constants.firstDataRow.IsValid(nameof(Constants.firstDataRow), errorMessage);
+        isValid &= Constants.dateColumn.IsValid(nameof(Constants.dateColumn), errorMessage);
+        isValid &= Constants.companiesNamesColumn.IsValid(nameof(Constants.companiesNamesColumn), errorMessage);
+        isValid &= Constants.companiesAddressesColumn.IsValid(nameof(Constants.companiesAddressesColumn), errorMessage);
+        isValid &= Constants.userNamesColumn.IsValid(nameof(Constants.userNamesColumn), errorMessage);
+        isValid &= Constants.userPositionsColumn.IsValid(nameof(Constants.userPositionsColumn), errorMessage);
+        isValid &= Constants.pcNumbersColumn.IsValid(nameof(Constants.pcNumbersColumn), errorMessage);
+        isValid &= Constants.defenderTypesColumn.IsValid(nameof(Constants.defenderTypesColumn), errorMessage);
+        isValid &= Constants.powerSupplyColumn.IsValid(nameof(Constants.powerSupplyColumn), errorMessage);
+        isValid &= Constants.systemDriveColumn.IsValid(nameof(Constants.systemDriveColumn), errorMessage);
+        isValid &= Constants.displayColumn.IsValid(nameof(Constants.displayColumn), errorMessage);
+        isValid &= Constants.mouseKeyboardColumn.IsValid(nameof(Constants.mouseKeyboardColumn), errorMessage);
+        isValid &= Constants.internetStabilityColumn.IsValid(nameof(Constants.internetStabilityColumn), errorMessage);
+        isValid &= Constants.fileServerColumn.IsValid(nameof(Constants.fileServerColumn), errorMessage);
+
+        if (!isValid)
+        {
+            _ = MessageBox.Show(errorMessage.ToString());
+        }
+
+        return isValid;
+    }
+
+    // Метод для проверки конкретного значения
+    private static bool IsValid (this int value, string name, StringBuilder errorMessage)
+    {
+        if (value < 1)
+        {
+            _ = errorMessage.AppendLine($"Неверное значение для {name}: {value}");
+            return false;
+        }
+
+        return true;
+    }
+}
+
+*/
