@@ -37,15 +37,15 @@ internal static class MouseKeyboard
                 string currentCellValue = worksheet.Cells [row, Constants.mouseKeyboardColumn].Text;
 
                 // Проверка наличия подстроки "отсутствуют"
-                if (!currentCellValue.Contains("отсутствуют", StringComparison.OrdinalIgnoreCase))
-                {
-                    Debug.WriteLine($"Найдено значение для {Constants.companyName}(адрес: {currentAddress}) в строке {row}. На ПК №:{pcNumberCell} проблемы с мышью/клавиатурой: {currentCellValue}");
-                    troubledPCNumbers.Add(pcNumberCell);
-                }
-                else
+                if (currentCellValue.Contains("отсутствуют", StringComparison.OrdinalIgnoreCase))
                 {
                     // если нет проблем с монитором
                     Debug.WriteLine($"Найдено значение для {Constants.companyName}(адрес: {currentAddress}) в строке {row}. На ПК №:{pcNumberCell} нет проблем с мышью/клавиатурой: {currentCellValue}");
+                }
+                else
+                {
+                    Debug.WriteLine($"Найдено значение для {Constants.companyName}(адрес: {currentAddress}) в строке {row}. На ПК №:{pcNumberCell} проблемы с мышью/клавиатурой: {currentCellValue}");
+                    troubledPCNumbers.Add(pcNumberCell);
                 }
             }
         }

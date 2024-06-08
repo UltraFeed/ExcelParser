@@ -37,15 +37,15 @@ internal static class Display
                 string currentCellValue = worksheet.Cells [row, Constants.displayColumn].Text;
 
                 // Проверка наличия подстроки "отсутствует"
-                if (!currentCellValue.Contains("отсутствует", StringComparison.OrdinalIgnoreCase))
-                {
-                    Debug.WriteLine($"Найдено значение для {Constants.companyName}(адрес: {currentAddress}) в строке {row}. На ПК №:{pcNumberCell} есть проблемы с монитором: {currentCellValue}");
-                    troubledPcNumbers.Add(pcNumberCell);
-                }
-                else
+                if (currentCellValue.Contains("отсутствует", StringComparison.OrdinalIgnoreCase))
                 {
                     // если нет проблем с монитором
                     Debug.WriteLine($"Найдено значение для {Constants.companyName}(адрес: {currentAddress}) в строке {row}. На ПК №:{pcNumberCell} нет проблем с монитором: {currentCellValue}");
+                }
+                else
+                {
+                    Debug.WriteLine($"Найдено значение для {Constants.companyName}(адрес: {currentAddress}) в строке {row}. На ПК №:{pcNumberCell} есть проблемы с монитором: {currentCellValue}");
+                    troubledPcNumbers.Add(pcNumberCell);
                 }
             }
         }
