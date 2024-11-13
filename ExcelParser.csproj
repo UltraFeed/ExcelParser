@@ -1,8 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
-		<TargetFramework>net8.0-windows</TargetFramework>
+		<TargetFramework>net9.0-windows</TargetFramework>
 		<IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
@@ -11,19 +10,16 @@
 		<UseWindowsForms>True</UseWindowsForms>
 		<ErrorReport>none</ErrorReport>
 	</PropertyGroup>
-
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
 		<WarningLevel>9999</WarningLevel>
 		<DebugType>none</DebugType>
 		<CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
 	</PropertyGroup>
-
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
 		<WarningLevel>9999</WarningLevel>
 		<DebugType>none</DebugType>
 		<CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
 	</PropertyGroup>
-
 	<ItemGroup>
 		<EmbeddedResource Include="resources\default_settings.json">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
@@ -35,10 +31,8 @@
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</EmbeddedResource>
 	</ItemGroup>
-
 	<ItemGroup>
 		<PackageReference Include="EPPlus" Version="7.4.2" />
 		<PackageReference Include="NPOI" Version="2.7.2" />
 	</ItemGroup>
-
 </Project>
