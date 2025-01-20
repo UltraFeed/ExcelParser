@@ -1,17 +1,17 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using ExcelParser.utilities;
 using NPOI.XWPF.UserModel;
 using OfficeOpenXml;
 
 namespace ExcelParser.modules;
 
-internal static class Internet
+internal static class Display
 {
 
-	internal static List<string> SearchAndPrintInternet (ExcelWorksheet worksheet, XWPFDocument doc)
+	internal static List<string> SearchAndPrintDisplay (ExcelWorksheet worksheet, XWPFDocument doc)
 	{
 		Debug.WriteLine($"\nSTART DEBUG MESSAGES\n");
-		List<string> troubledPCNumbers = [];
+		List<string> troubledPcNumbers = [];
 
 		// Перебор строк в столбце
 		for (int row = Constants.firstDataRow; row <= worksheet.Dimension.End.Row; row++)
@@ -34,38 +34,38 @@ internal static class Internet
 				string pcNumberCell = worksheet.Cells [row, Constants.pcNumbersColumn].Text;
 
 				// Получение значения ячейки в столбце
-				string currentCellValue = worksheet.Cells [row, Constants.internetStabilityColumn].Text;
+				string currentCellValue = worksheet.Cells [row, Constants.displayColumn].Text;
 
-				// Проверка наличия подстроки "да" (да, тормозит) в ячейке интернета
-				if (currentCellValue.Contains("да", StringComparison.OrdinalIgnoreCase))
+				// Проверка наличия подстроки "отсутствует"
+				if (currentCellValue.Contains("отсутствует", StringComparison.OrdinalIgnoreCase))
 				{
-					Debug.WriteLine($"Найдено значение для {Constants.companyName}(адрес: {currentAddress}) в строке {row}. На ПК №:{pcNumberCell} {currentCellValue} интернет");
-					troubledPCNumbers.Add(pcNumberCell);
+					// если нет проблем с монитором
+					Debug.WriteLine($"Найдено значение для {Constants.companyName}(адрес: {currentAddress}) в строке {row}. На ПК №:{pcNumberCell} нет проблем с монитором: {currentCellValue}");
 				}
 				else
 				{
-					// если нет проблем с интернетом
-					Debug.WriteLine($"Найдено значение для {Constants.companyName}(адрес: {currentAddress}) в строке {row}. На ПК №:{pcNumberCell} проблемы {currentCellValue}");
+					Debug.WriteLine($"Найдено значение для {Constants.companyName}(адрес: {currentAddress}) в строке {row}. На ПК №:{pcNumberCell} есть проблемы с монитором: {currentCellValue}");
+					troubledPcNumbers.Add(pcNumberCell);
 				}
 			}
 		}
 
 		Debug.WriteLine("");
 		DocumentUtils.CreateNullParagraphs(doc, 1);
-		string message1 = $"3.3 Сеть и Интернет";
+		string message1 = $"4.2 Мониторы";
 		Debug.WriteLine(message1);
 		DocumentUtils.AddParagraph(doc, message1, fontSize: 16, isBold: true);
 
-		if (troubledPCNumbers.Count != 0)
+		if (troubledPcNumbers.Count != 0)
 		{
 			string message21 = $"Выявлено: ";
-			string message22 = $"низкая скорость интернета от провайдера.";
+			string message22 = $"не на всех ПК мониторы работают корректно";
 			string message31 = $"Риски: ";
-			string message32 = $"замедление эффективности и скорости работы сотрудников за персональными компьютерами.";
+			string message32 = $"Медленная работа сотрудников";
 			string message41 = $"Рекомендации: ";
-			string message42 = $"использовать услуги другого провайдера.";
-			string message51 = $"Номера ПК c тормозящим интернетом: ";
-			string message52 = string.Join(", ", troubledPCNumbers);
+			string message42 = $"приобрести новые или отремонтировать мониторы на {troubledPcNumbers.Count} компьютере(ах).";
+			string message51 = $"Номера ПК, имеющих проблемы с мониторами: ";
+			string message52 = string.Join(", ", troubledPcNumbers);
 
 			Debug.WriteLine(message21);
 			Debug.WriteLine(message22);
@@ -83,12 +83,13 @@ internal static class Internet
 		}
 		else
 		{
-			string message0 = $"На ваших ПК нет проблем с интернетом.";
+			string message0 = $"На ваших ПК нет проблем с мониторами";
+			Debug.WriteLine(message0);
 			DocumentUtils.AddParagraph(doc, message0);
 		}
 
 		Debug.WriteLine($"\nEND DEBUG MESSAGES\n");
 
-		return troubledPCNumbers;
+		return troubledPcNumbers;
 	}
 }

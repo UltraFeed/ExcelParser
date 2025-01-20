@@ -1,11 +1,10 @@
-﻿#pragma warning disable CA1303
+#pragma warning disable CA1303
 #pragma warning disable CA2000
 #pragma warning disable CA2213
 #pragma warning disable CS8601
 #pragma warning disable CS8604
 #pragma warning disable CS8618
 #pragma warning disable CS8622
-#pragma warning disable IDE0305
 
 using System.Diagnostics;
 using ExcelParser.utilities;

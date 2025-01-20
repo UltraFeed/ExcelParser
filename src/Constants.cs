@@ -1,6 +1,5 @@
-﻿#pragma warning disable CS8604
+#pragma warning disable CS8604
 #pragma warning disable CA1305
-#pragma warning disable CA1812
 #pragma warning disable IDE1006
 
 using System.Reflection;

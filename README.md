@@ -1,4 +1,4 @@
-﻿# Parser Operation Logic
+# Parser Operation Logic
 
 - Place the parser and the table file in the same folder.
 - Upon the first run, the program will create a settings.json file, specifying default parameters for column numbers.

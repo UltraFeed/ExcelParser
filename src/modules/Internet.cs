@@ -1,14 +1,14 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using ExcelParser.utilities;
 using NPOI.XWPF.UserModel;
 using OfficeOpenXml;
 
 namespace ExcelParser.modules;
 
-internal static class Power
+internal static class Internet
 {
 
-	internal static List<string> SearchAndPrintPower (ExcelWorksheet worksheet, XWPFDocument doc)
+	internal static List<string> SearchAndPrintInternet (ExcelWorksheet worksheet, XWPFDocument doc)
 	{
 		Debug.WriteLine($"\nSTART DEBUG MESSAGES\n");
 		List<string> troubledPCNumbers = [];
@@ -34,37 +34,37 @@ internal static class Power
 				string pcNumberCell = worksheet.Cells [row, Constants.pcNumbersColumn].Text;
 
 				// Получение значения ячейки в столбце
-				string currentCellValue = worksheet.Cells [row, Constants.powerSupplyColumn].Text;
+				string currentCellValue = worksheet.Cells [row, Constants.internetStabilityColumn].Text;
 
-				// Проверка наличия подстроки "отсутствует" или "не держит" в значении столбца ИБП
-				if (currentCellValue.Contains("отсутствует", StringComparison.OrdinalIgnoreCase) || currentCellValue.Contains("не держит", StringComparison.OrdinalIgnoreCase))
+				// Проверка наличия подстроки "да" (да, тормозит) в ячейке интернета
+				if (currentCellValue.Contains("да", StringComparison.OrdinalIgnoreCase))
 				{
-					Debug.WriteLine($"Найдено значение для {Constants.companyName}(адрес: {currentAddress}) в строке {row}. На ПК №:{pcNumberCell} ИБП {currentCellValue}");
+					Debug.WriteLine($"Найдено значение для {Constants.companyName}(адрес: {currentAddress}) в строке {row}. На ПК №:{pcNumberCell} {currentCellValue} интернет");
 					troubledPCNumbers.Add(pcNumberCell);
 				}
 				else
 				{
-					// Если ИБП есть и работает
-					Debug.WriteLine($"Найдено значение для {Constants.companyName}(адрес: {currentAddress}) в строке {row}. На ПК №:{pcNumberCell} ИБП {currentCellValue}");
+					// если нет проблем с интернетом
+					Debug.WriteLine($"Найдено значение для {Constants.companyName}(адрес: {currentAddress}) в строке {row}. На ПК №:{pcNumberCell} проблемы {currentCellValue}");
 				}
 			}
 		}
 
 		Debug.WriteLine("");
 		DocumentUtils.CreateNullParagraphs(doc, 1);
-		string message1 = $"3.2 Отказоустойчивость рабочих станций";
+		string message1 = $"3.3 Сеть и Интернет";
 		Debug.WriteLine(message1);
 		DocumentUtils.AddParagraph(doc, message1, fontSize: 16, isBold: true);
 
 		if (troubledPCNumbers.Count != 0)
 		{
 			string message21 = $"Выявлено: ";
-			string message22 = $"не каждый ПК подключён к источнику бесперебойного питания.";
+			string message22 = $"низкая скорость интернета от провайдера.";
 			string message31 = $"Риски: ";
-			string message32 = $"потеря данных и отсутствие возможности сохранить работу при внезапных перебоях с электричеством.";
+			string message32 = $"замедление эффективности и скорости работы сотрудников за персональными компьютерами.";
 			string message41 = $"Рекомендации: ";
-			string message42 = $"Использование для защиты рабочих станций источников бесперебойного питания на {troubledPCNumbers.Count} компьютер(ах).";
-			string message51 = $"Номера ПК без ИБП: ";
+			string message42 = $"использовать услуги другого провайдера.";
+			string message51 = $"Номера ПК c тормозящим интернетом: ";
 			string message52 = string.Join(", ", troubledPCNumbers);
 
 			Debug.WriteLine(message21);
@@ -83,7 +83,7 @@ internal static class Power
 		}
 		else
 		{
-			string message0 = $"Каждый ПК подключён к источнику бесперебойного питания.";
+			string message0 = $"На ваших ПК нет проблем с интернетом.";
 			DocumentUtils.AddParagraph(doc, message0);
 		}
 

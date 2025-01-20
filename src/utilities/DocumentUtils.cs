@@ -1,4 +1,4 @@
-﻿#pragma warning disable CS8602
+#pragma warning disable CS8602
 
 using System.Diagnostics;
 using System.Globalization;

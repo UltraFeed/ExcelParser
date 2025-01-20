@@ -1,17 +1,16 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using ExcelParser.utilities;
 using NPOI.XWPF.UserModel;
 using OfficeOpenXml;
 
 namespace ExcelParser.modules;
 
-internal static class Display
+internal static class SystemDrive
 {
-
-	internal static List<string> SearchAndPrintDisplay (ExcelWorksheet worksheet, XWPFDocument doc)
+	internal static List<string> SearchAndPrintSystemDrive (ExcelWorksheet worksheet, XWPFDocument doc)
 	{
 		Debug.WriteLine($"\nSTART DEBUG MESSAGES\n");
-		List<string> troubledPcNumbers = [];
+		List<string> troubledPCNumbers = [];
 
 		// Перебор строк в столбце
 		for (int row = Constants.firstDataRow; row <= worksheet.Dimension.End.Row; row++)
@@ -34,38 +33,38 @@ internal static class Display
 				string pcNumberCell = worksheet.Cells [row, Constants.pcNumbersColumn].Text;
 
 				// Получение значения ячейки в столбце
-				string currentCellValue = worksheet.Cells [row, Constants.displayColumn].Text;
+				string currentCellValue = worksheet.Cells [row, Constants.systemDriveColumn].Text;
 
-				// Проверка наличия подстроки "отсутствует"
-				if (currentCellValue.Contains("отсутствует", StringComparison.OrdinalIgnoreCase))
+				// Проверка наличия подстроки "HDD" в ячейке интернета
+				if (currentCellValue.Contains("HDD", StringComparison.OrdinalIgnoreCase))
 				{
-					// если нет проблем с монитором
-					Debug.WriteLine($"Найдено значение для {Constants.companyName}(адрес: {currentAddress}) в строке {row}. На ПК №:{pcNumberCell} нет проблем с монитором: {currentCellValue}");
+					Debug.WriteLine($"Найдено значение для {Constants.companyName}(адрес: {currentAddress}) в строке {row}. На ПК №:{pcNumberCell} системный диск - {currentCellValue}");
+					troubledPCNumbers.Add(pcNumberCell);
 				}
 				else
 				{
-					Debug.WriteLine($"Найдено значение для {Constants.companyName}(адрес: {currentAddress}) в строке {row}. На ПК №:{pcNumberCell} есть проблемы с монитором: {currentCellValue}");
-					troubledPcNumbers.Add(pcNumberCell);
+					// если диск нормальный
+					Debug.WriteLine($"Найдено значение для {Constants.companyName}(адрес: {currentAddress}) в строке {row}. На ПК №:{pcNumberCell} системный диск - {currentCellValue}");
 				}
 			}
 		}
 
 		Debug.WriteLine("");
 		DocumentUtils.CreateNullParagraphs(doc, 1);
-		string message1 = $"4.2 Мониторы";
+		string message1 = $"4.1 Системные диски";
 		Debug.WriteLine(message1);
 		DocumentUtils.AddParagraph(doc, message1, fontSize: 16, isBold: true);
 
-		if (troubledPcNumbers.Count != 0)
+		if (troubledPCNumbers.Count != 0)
 		{
 			string message21 = $"Выявлено: ";
-			string message22 = $"не на всех ПК мониторы работают корректно";
+			string message22 = $"не на всех ПК установлены SSD-накопителей в качестве системных.";
 			string message31 = $"Риски: ";
-			string message32 = $"Медленная работа сотрудников";
+			string message32 = $"потеря данных из-за износа накопителей и возникновение существенных затруднений при попытке восстановления данных.";
 			string message41 = $"Рекомендации: ";
-			string message42 = $"приобрести новые или отремонтировать мониторы на {troubledPcNumbers.Count} компьютере(ах).";
-			string message51 = $"Номера ПК, имеющих проблемы с мониторами: ";
-			string message52 = string.Join(", ", troubledPcNumbers);
+			string message42 = $"Установка SSD-накопителей на {troubledPCNumbers.Count} компьютер(ов).";
+			string message51 = $"Номера ПК c носителями плохого качества: ";
+			string message52 = string.Join(", ", troubledPCNumbers);
 
 			Debug.WriteLine(message21);
 			Debug.WriteLine(message22);
@@ -79,17 +78,17 @@ internal static class Display
 			DocumentUtils.SetColorfulBlock(doc, message21, message22, "BLACK"); //Выявлено:
 			DocumentUtils.SetColorfulBlock(doc, message31, message32, "RED"); //Риски:
 			DocumentUtils.SetColorfulBlock(doc, message41, message42, "GREEN"); //Рекомендации:
+
 			DocumentUtils.SetPcNumbers(doc, message51, message52); // номера ПК
 		}
 		else
 		{
-			string message0 = $"На ваших ПК нет проблем с мониторами";
-			Debug.WriteLine(message0);
+			string message0 = $"На ваших ПК нет проблем с системными дисками.";
 			DocumentUtils.AddParagraph(doc, message0);
 		}
 
 		Debug.WriteLine($"\nEND DEBUG MESSAGES\n");
 
-		return troubledPcNumbers;
+		return troubledPCNumbers;
 	}
 }

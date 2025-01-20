@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using ExcelParser.utilities;
 using NPOI.XWPF.UserModel;
 using OfficeOpenXml;

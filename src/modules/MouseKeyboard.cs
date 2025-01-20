@@ -1,13 +1,14 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using ExcelParser.utilities;
 using NPOI.XWPF.UserModel;
 using OfficeOpenXml;
 
 namespace ExcelParser.modules;
 
-internal static class SystemDrive
+internal static class MouseKeyboard
 {
-	internal static List<string> SearchAndPrintSystemDrive (ExcelWorksheet worksheet, XWPFDocument doc)
+
+	internal static List<string> SearchAndPrintMouseKeyboard (ExcelWorksheet worksheet, XWPFDocument doc)
 	{
 		Debug.WriteLine($"\nSTART DEBUG MESSAGES\n");
 		List<string> troubledPCNumbers = [];
@@ -33,37 +34,37 @@ internal static class SystemDrive
 				string pcNumberCell = worksheet.Cells [row, Constants.pcNumbersColumn].Text;
 
 				// Получение значения ячейки в столбце
-				string currentCellValue = worksheet.Cells [row, Constants.systemDriveColumn].Text;
+				string currentCellValue = worksheet.Cells [row, Constants.mouseKeyboardColumn].Text;
 
-				// Проверка наличия подстроки "HDD" в ячейке интернета
-				if (currentCellValue.Contains("HDD", StringComparison.OrdinalIgnoreCase))
+				// Проверка наличия подстроки "отсутствуют"
+				if (currentCellValue.Contains("отсутствуют", StringComparison.OrdinalIgnoreCase))
 				{
-					Debug.WriteLine($"Найдено значение для {Constants.companyName}(адрес: {currentAddress}) в строке {row}. На ПК №:{pcNumberCell} системный диск - {currentCellValue}");
-					troubledPCNumbers.Add(pcNumberCell);
+					// если нет проблем с монитором
+					Debug.WriteLine($"Найдено значение для {Constants.companyName}(адрес: {currentAddress}) в строке {row}. На ПК №:{pcNumberCell} нет проблем с мышью/клавиатурой: {currentCellValue}");
 				}
 				else
 				{
-					// если диск нормальный
-					Debug.WriteLine($"Найдено значение для {Constants.companyName}(адрес: {currentAddress}) в строке {row}. На ПК №:{pcNumberCell} системный диск - {currentCellValue}");
+					Debug.WriteLine($"Найдено значение для {Constants.companyName}(адрес: {currentAddress}) в строке {row}. На ПК №:{pcNumberCell} проблемы с мышью/клавиатурой: {currentCellValue}");
+					troubledPCNumbers.Add(pcNumberCell);
 				}
 			}
 		}
 
 		Debug.WriteLine("");
 		DocumentUtils.CreateNullParagraphs(doc, 1);
-		string message1 = $"4.1 Системные диски";
+		string message1 = $"4.3 Клавиатуры и мыши";
 		Debug.WriteLine(message1);
 		DocumentUtils.AddParagraph(doc, message1, fontSize: 16, isBold: true);
 
 		if (troubledPCNumbers.Count != 0)
 		{
 			string message21 = $"Выявлено: ";
-			string message22 = $"не на всех ПК установлены SSD-накопителей в качестве системных.";
+			string message22 = $"не на всех ПК мыши и клавиатуры работают корректно";
 			string message31 = $"Риски: ";
-			string message32 = $"потеря данных из-за износа накопителей и возникновение существенных затруднений при попытке восстановления данных.";
+			string message32 = $"Медленная работа сотрудников";
 			string message41 = $"Рекомендации: ";
-			string message42 = $"Установка SSD-накопителей на {troubledPCNumbers.Count} компьютер(ов).";
-			string message51 = $"Номера ПК c носителями плохого качества: ";
+			string message42 = $"приобрести новые мыши и клавиатуры для {troubledPCNumbers.Count} компьютера(ов).";
+			string message51 = $"Номера ПК, имеющих проблемы с клавиатурой или мышью: ";
 			string message52 = string.Join(", ", troubledPCNumbers);
 
 			Debug.WriteLine(message21);
@@ -78,12 +79,12 @@ internal static class SystemDrive
 			DocumentUtils.SetColorfulBlock(doc, message21, message22, "BLACK"); //Выявлено:
 			DocumentUtils.SetColorfulBlock(doc, message31, message32, "RED"); //Риски:
 			DocumentUtils.SetColorfulBlock(doc, message41, message42, "GREEN"); //Рекомендации:
-
 			DocumentUtils.SetPcNumbers(doc, message51, message52); // номера ПК
 		}
 		else
 		{
-			string message0 = $"На ваших ПК нет проблем с системными дисками.";
+			string message0 = $"На ваших ПК нет проблем с клавиатурами и мышками";
+			Debug.WriteLine(message0);
 			DocumentUtils.AddParagraph(doc, message0);
 		}
 

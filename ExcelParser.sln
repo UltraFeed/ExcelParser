@@ -3,7 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelParser", "ExcelParser.csproj", "{BE0D818D-D5BF-4875-867F-5257ED9FEFCD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelParser", "src\ExcelParser.csproj", "{BE0D818D-D5BF-4875-867F-5257ED9FEFCD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9A73BEA8-1B94-4490-A5C4-F4AE72F4A635}"
+	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		.github\workflows\codeql.yml = .github\workflows\codeql.yml
+		LICENSE = LICENSE
+		README.md = README.md
+		.github\renovate.json = .github\renovate.json
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
