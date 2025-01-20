@@ -7,7 +7,6 @@ namespace ExcelParser.modules;
 
 internal static class Internet
 {
-
 	internal static List<string> SearchAndPrintInternet (ExcelWorksheet worksheet, XWPFDocument doc)
 	{
 		Debug.WriteLine($"\nSTART DEBUG MESSAGES\n");

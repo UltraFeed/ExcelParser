@@ -7,7 +7,6 @@ namespace ExcelParser.modules;
 
 internal static class Defender
 {
-
 	internal static List<string> SearchAndPrintDefender (ExcelWorksheet worksheet, XWPFDocument doc)
 	{
 		Debug.WriteLine($"\nSTART DEBUG MESSAGES\n");

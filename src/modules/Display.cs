@@ -7,7 +7,6 @@ namespace ExcelParser.modules;
 
 internal static class Display
 {
-
 	internal static List<string> SearchAndPrintDisplay (ExcelWorksheet worksheet, XWPFDocument doc)
 	{
 		Debug.WriteLine($"\nSTART DEBUG MESSAGES\n");

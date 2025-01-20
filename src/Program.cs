@@ -67,7 +67,6 @@ internal sealed class Program : Form
 		{
 			Dock = DockStyle.Fill,
 			Value = DateTimePicker.MinimumDateTime,
-
 		};
 
 		secondDatePicker = new DateTimePicker
@@ -153,7 +152,6 @@ internal sealed class Program : Form
 
 	private void GenerateReportButton_Click (object sender, EventArgs e)
 	{
-
 		if (string.IsNullOrWhiteSpace(companyComboBox.SelectedItem?.ToString()) || string.IsNullOrWhiteSpace(addressComboBox.SelectedItem?.ToString()))
 		{
 			_ = MessageBox.Show($"Выберите компанию и адрес для составления отчета");
@@ -224,7 +222,6 @@ internal sealed class Program : Form
 
 	private static void Exit (string message)
 	{
-
 		Debug.WriteLine(message);
 		_ = MessageBox.Show($"{message}\nНажмите ОК для выхода");
 		Environment.Exit(0);

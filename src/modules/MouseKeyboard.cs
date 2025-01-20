@@ -7,7 +7,6 @@ namespace ExcelParser.modules;
 
 internal static class MouseKeyboard
 {
-
 	internal static List<string> SearchAndPrintMouseKeyboard (ExcelWorksheet worksheet, XWPFDocument doc)
 	{
 		Debug.WriteLine($"\nSTART DEBUG MESSAGES\n");

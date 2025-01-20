@@ -7,7 +7,6 @@ namespace ExcelParser.modules;
 
 internal static class Power
 {
-
 	internal static List<string> SearchAndPrintPower (ExcelWorksheet worksheet, XWPFDocument doc)
 	{
 		Debug.WriteLine($"\nSTART DEBUG MESSAGES\n");
