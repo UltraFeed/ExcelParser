@@ -7,6 +7,7 @@
 #pragma warning disable CS8622
 
 using System.Diagnostics;
+using System.Reflection;
 using ExcelParser.utilities;
 using NPOI.XWPF.UserModel;
 using OfficeOpenXml;
@@ -194,7 +195,7 @@ internal sealed class Program : Form
 	// Функция для получения листа Excel
 	private static ExcelWorksheet GetWorksheet (string currentDirectory)
 	{
-		ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+		ExcelPackage.License.SetNonCommercialOrganization(Assembly.GetEntryAssembly()!.GetName().Name);
 
 		// поиск файлов .xlsx
 		string? xlsxPath = Directory.GetFiles(currentDirectory, "*.xlsx").FirstOrDefault();
