@@ -37,7 +37,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="EPPlus" Version="8.0.7" />
+		<PackageReference Include="EPPlus" Version="8.0.8" />
 		<PackageReference Include="NPOI" Version="2.7.4" />
 	</ItemGroup>
 
