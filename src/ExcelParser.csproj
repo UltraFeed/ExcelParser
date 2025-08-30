@@ -10,15 +10,6 @@
 		<PlatformTarget>AnyCPU</PlatformTarget>
 		<UseWindowsForms>True</UseWindowsForms>
 		<ErrorReport>none</ErrorReport>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-		<WarningLevel>9999</WarningLevel>
-		<DebugType>none</DebugType>
-		<CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
 		<WarningLevel>9999</WarningLevel>
 		<DebugType>none</DebugType>
 		<CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
