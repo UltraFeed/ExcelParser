@@ -29,7 +29,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="EPPlus" Version="8.2.0" />
-		<PackageReference Include="NPOI" Version="2.7.4" />
+		<PackageReference Include="NPOI" Version="2.7.5" />
 	</ItemGroup>
 
 </Project>
